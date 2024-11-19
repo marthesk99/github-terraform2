@@ -9,7 +9,7 @@ on:
     branches-ignore:
       - 'main'
     paths:
-      - 'module09/**'
+      - 'modul09/**'
   workflow_dispatch:
 
 
