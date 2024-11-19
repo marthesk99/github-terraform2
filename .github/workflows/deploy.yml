@@ -9,6 +9,7 @@ on:
       - 'main'
     paths:
       - 'module09/**'
+  workflow_dispatch:
       
 jobs:
   terraform:
