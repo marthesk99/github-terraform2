@@ -9,7 +9,6 @@ on:
       - closed
     branches:
       - 'main'
-  workflow_dispatch: {}
       
 jobs:
   terraform:
