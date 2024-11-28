@@ -2,7 +2,7 @@ locals {
   workspace_suffix = terraform.workspace == "default" ? "" : "${terraform.workspace}"
   rg_name          = "${var.rg_name}-${local.workspace_suffix}"
   sa_name          = "${var.sa_name}${random_string.random_string.result}"
-  dynamic_content = "<h1>Web page created with Terraform M9: ${terraform.workspace}</h1>"
+  dynamic_content = "<h1>Web page created with Terraform Modul9: ${terraform.workspace}</h1>"
 }
 
 resource "random_string" "random_string" {
