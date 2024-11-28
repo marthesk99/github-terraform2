@@ -43,12 +43,3 @@ jobs:
         id: validate
         run: terraform validate
         working-directory: ${{ env.WORKING_DIR }}
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          branch: ${{ github.ref_name }}
-          base: main
-          title: "Merge branch ${{ github.ref_name }} into main"
-          body: "This Pull Request was automatically created after successful validation."
-        
