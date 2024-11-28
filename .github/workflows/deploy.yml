@@ -35,11 +35,11 @@ jobs:
       # Generate a plan for Terraform changes
       - name: Terraform plan
         id: plan
-        run: terraform plan
+        run: terraform plan -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
         working-directory: ${{ env.WORKING_DIR }}
       
       # Apply Terraform changes
       - name: Terraform apply
         id: apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
         working-directory: ${{ env.WORKING_DIR }}
