@@ -4,11 +4,12 @@ name: Deploy infrastructure
 
 # Controls when the workflow will run
 on:
-  push:
+  pull_request:
+    types: 
+      - closed
     branches:
       - 'main'
-    paths:
-      - 'module09/**'
+  workflow_dispatch: {}
       
 jobs:
   terraform:
