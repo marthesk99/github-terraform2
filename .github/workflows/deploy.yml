@@ -4,11 +4,11 @@ name: Deploy infrastructure
 
 # Controls when the workflow will run
 on:
-  pull_request:
-    types: 
-      - closed
+  push:
     branches:
       - 'main'
+    paths:
+      - 'modul09/**'
       
 jobs:
   terraform:
@@ -20,7 +20,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      WORKING_DIR: ./module09
+      WORKING_DIR: ./course materials/module07/demo-infra
       
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -35,11 +35,11 @@ jobs:
       # Generate a plan for Terraform changes
       - name: Terraform plan
         id: plan
-        run: terraform plan 
+        run: terraform plan
         working-directory: ${{ env.WORKING_DIR }}
       
       # Apply Terraform changes
       - name: Terraform apply
         id: apply
-        run: terraform apply -auto-approve 
+        run: terraform apply -auto-approve
         working-directory: ${{ env.WORKING_DIR }}
