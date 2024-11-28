@@ -15,7 +15,6 @@ resource "random_string" "random_string" {
 resource "azurerm_resource_group" "rg_web" {
   name     = local.rg_name
   location = var.location
-  min_tls_version = "TLS1_2"
 }
 
 # Create Storage Account
@@ -25,6 +24,8 @@ resource "azurerm_storage_account" "sa_web" {
   location                 = azurerm_resource_group.rg_web.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+
+  min_tls_version = "TLS1_2"
 
   static_website {
     index_document = var.index_document
