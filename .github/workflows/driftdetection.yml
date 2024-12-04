@@ -68,7 +68,7 @@ jobs:
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.office365.com  # Hotmail/Outlook SMTP server
-          server_port: 587                   # Port for TLS
+          server_port: 465                   # Port for TLS
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "Drift Detected in Azure Infrastructure"
