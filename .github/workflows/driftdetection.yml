@@ -87,6 +87,7 @@ jobs:
           # Attachments
           attachments: ${{ env.WORKING_DIR }}/drift_report.json
 
+
       # Step 8: Notify via GitHub Summary
       - name: Notify via GitHub Summary
         if: env.exit_code == '2'
