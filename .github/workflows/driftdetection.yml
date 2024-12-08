@@ -63,19 +63,39 @@ jobs:
           path: ${{ env.WORKING_DIR }}/drift_report.json
           
       # Step 7: Send Email Notification
-              - name: Send mail
-        uses: dawidd6/action-send-mail@v4
-        with:
-          connection_url: ${{ secrets.MAIL_CONNECTION }}
-          subject: "Drift Detected in Azure Infrastructure"
-          to: ${{ secrets.EMAIL_RECIPIENT }}
-          from: Drift Detection <${{ secrets.MAIL_USERNAME }}>
-          body: |
-            Drift has been detected in the Azure infrastructure. 
-            Please review the attached drift report for details.
-          attachments: ${{ env.WORKING_DIR }}/drift_report.json
-          nodemailerdebug: true
-          nodemailerlog: true
+      - name: Send mail
+      uses: dawidd6/action-send-mail@v4
+      with:
+        # Bruk connection_url fra secrets:
+        connection_url: ${{ secrets.MAIL_CONNECTION }}
+    
+        # Optional SMTP details (disse brukes bare hvis connection_url mangler):
+        server_address: smtp-mail.outlook.com  # Oppdatert servernavn
+        server_port: 587  # Bruker STARTTLS
+        secure: false  # Må være false for STARTTLS (secure=true brukes for implicit TLS med port 465)
+    
+        # Påkrevd: Emne for e-posten
+        subject: Drift Detected in Azure Infrastructure
+    
+        # Påkrevd: Mottakere
+        to: ${{ secrets.EMAIL_RECIPIENT }}
+    
+        # Påkrevd: Avsender
+        from: Drift Detection <${{ secrets.MAIL_USERNAME }}>
+    
+        # Innhold i e-posten
+        body: |
+          Drift has been detected in the Azure infrastructure. 
+          Please review the attached drift report for details.
+    
+        # Valgfritt: Vedlegg
+        attachments: ${{ env.WORKING_DIR }}/drift_report.json
+    
+        # Debugging og logging
+        nodemailerlog: true
+        nodemailerdebug: true
+        priority: high
+
 
       # Step 8: Notify via GitHub Summary
       - name: Notify via GitHub Summary
