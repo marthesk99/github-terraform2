@@ -83,6 +83,7 @@ jobs:
           nodemailerdebug: true
           nodemailerlog: true
 
+
       # Step 8: Notify via GitHub Summary (optional)
       - name: Notify via GitHub Summary
         if: env.exit_code == '2'  # Runs only if drift is detected
