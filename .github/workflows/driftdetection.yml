@@ -64,35 +64,18 @@ jobs:
 
       # Step 7: Send Email Notification
       - name: Send mail
-        if: env.exit_code == '2'  # Runs only if drift is detected
-        uses: dawidd6/action-send-mail@v4
-        with:
-          # Specify connection via URL
+      uses: dawidd6/action-send-mail@v4
+      with:
           connection_url: ${{ secrets.MAIL_CONNECTION }}
-
-          # Optional: Manual configuration (ignored if connection_url is used)
-          server_address: smtp.office365.com
-          server_port: 587
-          secure: true
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-
-          # Required: Email details
           subject: "Drift Detected in Azure Infrastructure"
           to: ${{ secrets.EMAIL_RECIPIENT }}
           from: Drift Detection <${{ secrets.MAIL_USERNAME }}>
           body: |
             Drift has been detected in the Azure infrastructure. 
             Please review the attached drift report for details.
-
-          # Optional: Attachments
           attachments: ${{ env.WORKING_DIR }}/drift_report.json
-
-          # Optional: Debugging and additional options
-          nodemailerlog: true
           nodemailerdebug: true
-          priority: high
-
+          nodemailerlog: true
 
 
       # Step 8: Notify via GitHub Summary
